@@ -1,0 +1,12 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^R/bak$
+^cran-comments.md$
+^Rplots.pdf$
+^.DS_Store$
+^informal_tests/*$
+^simulations/*$
+^Rplots\.pdf$
+^.Rhistory
+^.Rapp.history
+^cran-comments\.md$

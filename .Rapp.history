@@ -1,0 +1,250 @@
+studentize='no',
+B=B)
+}
+)
+)
+tot.time= proc.time()-ptm
+print(tot.time)
+100/4
+## testing 'gaussian_bootstrap_test'
+nrep  <- 100
+B  <- 100
+# setup cluster
+cluster <- makePSOCKcluster(3)
+clusterExport(cluster, c(ls(), 'C1', 'C2', 'psnice'))
+system.time(parLapply(cluster, 1:4, function(x) {
+psnice(value = 19)
+Data = rmtnorm(N, C1, C2, matrix(2, nrow(C1), nrow(C2)) )
+gaussian_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='no', B=B)
+}
+))
+ptm=proc.time()
+pvals.nostud=simplify2array(parLapply(cluster, 1:nrep, function(x) {
+psnice(value = 19)
+Data = rmtnorm(N, C1, C2, matrix(2, nrow(C1), nrow(C2)) )
+gaussian_bootstrap_test(Data,
+L1=1:3,
+L2=1:3,
+studentize='no',
+B=B)
+}
+)
+)
+tot.time= proc.time()-ptm
+print(tot.time)
+ptm=proc.time()
+pvals.diag=simplify2array(parLapply(cluster, 1:nrep, function(x) {
+psnice(value = 19)
+Data = rmtnorm(N, C1, C2, matrix(2, nrow(C1), nrow(C2)) )
+gaussian_bootstrap_test(Data,
+L1=1:3,
+L2=1:3,
+studentize='diag',
+B=B)
+}
+)
+)
+tot.time= proc.time()-ptm
+print(tot.time)
+ptm=proc.time()
+pvals.full=simplify2array(parLapply(cluster, 1:nrep, function(x) {
+psnice(value = 19)
+Data = rmtnorm(N, C1, C2, matrix(2, nrow(C1), nrow(C2)) )
+gaussian_bootstrap_test(Data,
+L1=1:3,
+L2=1:3,
+studentize='full',
+B=B)
+}
+)
+)
+tot.time= proc.time()-ptm
+print(tot.time)
+stopCluster(cluster)
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+}
+par(op)
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.diag[i,], xlim=c(0,1))
+}
+}
+par(op)
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.full[i,], xlim=c(0,1))
+}
+}
+par(op)
+### testing 'empirical_bootstrap_test'
+nrep  <- 100
+B  <- 100
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='no', B=B)
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='diag', B=B)
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='full', B=B)
+nrep  <- 100
+B  <- 100
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='no', B=B)
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='diag', B=B)
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='full', B=B)
+source("R/covsep.R")
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='no', B=B)
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='diag', B=B)
+empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='full', B=B)
+base::source("/tmp/r-plugin-stavakol/Rsource-27703-test.R")
+base::source("/tmp/r-plugin-stavakol/Rsource-27703-test.R")
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.diag[i,], xlim=c(0,1))
+}
+}
+par(op)
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.full[i,], xlim=c(0,1))
+}
+}
+par(op)
+title
+# plot results
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap', outer=TRUE)
+}
+par(op)
+dir()
+getwd()
+# plot results
+pdf()
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap', outer=TRUE)
+}
+par(op)
+dev.off()
+?pdf
+pdf(paper='a4')
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap', outer=TRUE)
+}
+par(op)
+dev.off()
+pdf(paper='a4', width=0, height=0)
+op <- par(mfrow=c(3,1))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap', outer=TRUE)
+}
+par(op)
+dev.off()
+par(oma)
+par('oma')
+op <- par(mfrow=c(3,1), oma=1:4)
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap', outer=TRUE)
+}
+par(op)
+op <- par(mfrow=c(3,1), oma=c(0,0,3,0))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap', outer=TRUE)
+}
+par(op)
+# plot results
+pdf(paper='a4', width=0, height=0)
+op <- par(mfrow=c(3,1), oma=c(0,0,3,0))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap, no stud', outer=TRUE)
+for(i in 1:3){
+hist(pvals.diag[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap, diag stud', outer=TRUE)
+for(i in 1:3){
+hist(pvals.full[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap, full stud', outer=TRUE)
+}
+par(op)
+dev.off()
+# plot results
+pdf(paper='a4', width=0, height=0)
+op <- par(mfrow=c(3,1), oma=c(0,0,3,0))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap, no stud', outer=TRUE)
+for(i in 1:3){
+hist(pvals.diag[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap, diag stud', outer=TRUE)
+for(i in 1:3){
+hist(pvals.full[i,], xlim=c(0,1))
+}
+title(main='Empirical Bootstrap, full stud', outer=TRUE)
+}
+par(op)
+dev.off()
+# plot results
+pdf(paper='a4', width=0, height=0)
+op <- par(mfrow=c(3,1), oma=c(0,0,3,0))
+{
+for(i in 1:3){
+hist(pvals.nostud[i,], xlim=c(0,1))
+}
+title(main='Gaussian Bootstrap, no stud', outer=TRUE)
+for(i in 1:3){
+hist(pvals.diag[i,], xlim=c(0,1))
+}
+title(main='Gaussian Bootstrap, diag stud', outer=TRUE)
+for(i in 1:3){
+hist(pvals.full[i,], xlim=c(0,1))
+}
+title(main='Gaussian Bootstrap, full stud', outer=TRUE)
+}
+par(op)
+dev.off()
+system.time(ans=difference_fullcov(Data))
+str(ans)
+system.time(ans=difference_fullcov(Data))
+system.time(ans=difference_fullcov(Data))
+difference_fullcov(Data)
+str(ans)
+system.time(ans=difference_fullcov(Data))
+system.time(
+ans=difference_fullcov(Data)
+)
+ans <- difference_fullcov(Data)
+system.time(
+ans <- difference_fullcov(Data)
+)
+system.time( ans <- difference_fullcov(Data))
+str(ans)
