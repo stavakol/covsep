@@ -1,0 +1,12 @@
+var.names<- c("sim.name",
+              "simulation.seed",
+              "N",
+              "gam",
+              "B",
+              "nrep",
+              "studentize",
+              "sim.norm",
+              "pval.method",
+              "alpha",
+              "l1",
+              "l2");
