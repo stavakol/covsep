@@ -104,9 +104,10 @@ rmtnorm = function(N, C1, C2, M=matrix(0, nrow(C1), nrow(C2)) ){
 #' @examples 
 #' Data = generate_surface_data(30, C1, C2, gamma=0)
 #'
-#' @references \cite{John A. D. Aston, Davide Pigoli, Shahin Tavakoli, "Tests
-#' for separability in nonparametric covariance operators of random surfaces",
-#' 2015, under revision}, \url{http://arxiv.org/abs/1505.02023}
+#' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
+#' separability in nonparametric covariance operators of random surfaces. Ann.
+#' Statist. 45 (2017), no. 4, 1431--1461. doi:10.1214/16-AOS1495.
+#' https://projecteuclid.org/euclid.aos/1498636862}
 #' @export
 
 
@@ -161,9 +162,10 @@ generate_surface_data  <- function(N, C1, C2, gamma, distribution='gaussian'){
 #' data(C1)
 #' str(C1) 
 #' 
-#' @references \cite{John A. D. Aston, Davide Pigoli, Shahin Tavakoli, "Tests
-#' for separability in nonparametric covariance operators of random surfaces",
-#' 2015, under revision}, \url{http://arxiv.org/abs/1505.02023}
+#' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
+#' separability in nonparametric covariance operators of random surfaces. Ann.
+#' Statist. 45 (2017), no. 4, 1431--1461. doi:10.1214/16-AOS1495.
+#' https://projecteuclid.org/euclid.aos/1498636862}
 
 "C1"
 
@@ -179,9 +181,10 @@ generate_surface_data  <- function(N, C1, C2, gamma, distribution='gaussian'){
 #' data(C2)
 #' str(C2)
 #' 
-#' @references \cite{John A. D. Aston, Davide Pigoli, Shahin Tavakoli, "Tests
-#' for separability in nonparametric covariance operators of random surfaces",
-#' 2015, under revision}, \url{http://arxiv.org/abs/1505.02023}
+#' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
+#' separability in nonparametric covariance operators of random surfaces. Ann.
+#' Statist. 45 (2017), no. 4, 1431--1461. doi:10.1214/16-AOS1495.
+#' https://projecteuclid.org/euclid.aos/1498636862}
 
 "C2"
 
@@ -381,9 +384,10 @@ projected_differences = function(Data, l1=1, l2=1, with.asymptotic.variances=TRU
 #' data(SurfacesData)
 #' clt_test(SurfacesData, L1=c(1,2), L2=c(1,4))
 #'
-#' @references \cite{John A. D. Aston, Davide Pigoli, Shahin Tavakoli, "Tests
-#' for separability in nonparametric covariance operators of random surfaces",
-#' 2015, under revision}, \url{http://arxiv.org/abs/1505.02023}
+#' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
+#' separability in nonparametric covariance operators of random surfaces. Ann.
+#' Statist. 45 (2017), no. 4, 1431--1461. doi:10.1214/16-AOS1495.
+#' https://projecteuclid.org/euclid.aos/1498636862}
 #' @export
 
 clt_test  <- function(Data, L1, L2)
@@ -433,10 +437,13 @@ clt_test  <- function(Data, L1, L2)
 #' j = 1, \ldots, l2}, for each pair (l1,l2) = (L1[k], L2[k]), for k = 1:length(L1).
 #' 
 #' \code{studentize} can take the values \describe{
-#'     \item{'no'}{no studentization is performed}
-#'     \item{'diag'}{each projection coordinate is renormalized by an estimate of its standard deviation}
-#'     \item{'full'}{the projection coordinates are renormalized by an estimate of their joint covariance}
+#'     \item{'full'}{default & recommended method. Yhe projection coordinates are renormalized by an estimate of
+#'     their joint covariance}
+#'     \item{'no'}{NOT RECOMMENDED. No studentization is performed}
+#'     \item{'diag'}{NOT RECOMMENDED. Each projection coordinate is renormalized by an estimate of its standard deviation}
 #' }
+#' 
+#' \code{B} the number of bootstrap replicates (1000 by default).
 #'
 #' @return The p-value of the test for each pair \code{(l1,l2) = (L1[k], L2[k])}, for \code{k = 1:length(L1)}.
 #' 
@@ -444,16 +451,17 @@ clt_test  <- function(Data, L1, L2)
 #' 
 #' @examples
 #' data(SurfacesData)
-#' \dontrun{gaussian_bootstrap_test(SurfacesData,L1=1,L2=1,B=100,
-#' studentize='full')} #' pvalue of the test
+#' \dontrun{gaussian_bootstrap_test(SurfacesData)}
+#' \dontrun{gaussian_bootstrap_test(SurfacesData, L1=2,L2=2,B=1000, studentize='full')}
 #'
-#' @references \cite{John A. D. Aston, Davide Pigoli, Shahin Tavakoli, "Tests
-#' for separability in nonparametric covariance operators of random surfaces",
-#' 2015, under revision}, \url{http://arxiv.org/abs/1505.02023}
+#' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
+#' separability in nonparametric covariance operators of random surfaces. Ann.
+#' Statist. 45 (2017), no. 4, 1431--1461. doi:10.1214/16-AOS1495.
+#' https://projecteuclid.org/euclid.aos/1498636862}
 #' @export
 
 
-gaussian_bootstrap_test  <- function(Data, L1, L2, studentize='full', B=100, verbose=FALSE)
+gaussian_bootstrap_test  <- function(Data, L1=1, L2=2, studentize='full', B=100, verbose=FALSE)
 {
     N<-dim(Data)[1]
     d1 <- dim(Data)[2]
@@ -546,10 +554,13 @@ gaussian_bootstrap_test  <- function(Data, L1, L2, studentize='full', B=100, ver
 #' j = 1, \ldots, l2}, for each pair (l1,l2) = (L1[k], L2[k]), for k = 1:length(L1).
 #' 
 #' \code{studentize} can take the values \describe{
-#'     \item{'no'}{no studentization is performed}
-#'     \item{'diag'}{each projection coordinate is renormalized by an estimate of its standard deviation}
-#'     \item{'full'}{the projection coordinates are renormalized by an estimate of their joint covariance}
+#'     \item{'full'}{default & recommended method. Yhe projection coordinates are renormalized by an estimate of
+#'     their joint covariance}
+#'     \item{'no'}{NOT RECOMMENDED. No studentization is performed}
+#'     \item{'diag'}{NOT RECOMMENDED. Each projection coordinate is renormalized by an estimate of its standard deviation}
 #' }
+#' 
+#' \code{B} the number of bootstrap replicates (1000 by default).
 #'
 #' @return The p-value of the test for each pair \code{(l1,l2) = (L1[k], L2[k])}, for \code{k = 1:length(L1)}.
 #' 
@@ -557,13 +568,15 @@ gaussian_bootstrap_test  <- function(Data, L1, L2, studentize='full', B=100, ver
 #' 
 #' @examples 
 #' data(SurfacesData)
-#' \dontrun{empirical_bootstrap_test(SurfacesData,L1=1,L2=1, B=100, studentize='full')}
-#' @references \cite{John A. D. Aston, Davide Pigoli, Shahin Tavakoli, "Tests
-#' for separability in nonparametric covariance operators of random surfaces",
-#' 2015, under revision}, \url{http://arxiv.org/abs/1505.02023}
+#' \dontrun{empirical_bootstrap_test(SurfacesData)}
+#' \dontrun{empirical_bootstrap_test(SurfacesData,L1=2,L2=2, B=1000, studentize='full')}
+#' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
+#' separability in nonparametric covariance operators of random surfaces. Ann.
+#' Statist. 45 (2017), no. 4, 1431--1461. doi:10.1214/16-AOS1495.
+#' https://projecteuclid.org/euclid.aos/1498636862}
 #' @export
 
-empirical_bootstrap_test  <- function(Data, L1, L2, studentize, B=100, verbose=FALSE)
+empirical_bootstrap_test  <- function(Data, L1=1, L2=1, studentize='full', B=1000, verbose=FALSE)
 {
     N<-dim(Data)[1]
     d1 <- dim(Data)[2]
@@ -656,7 +669,8 @@ difference_fullcov <- function(Data){
 #' of the covariance structure for a random surface (introduced in the paper
 #' \url{http://arxiv.org/abs/1505.02023}), when generated from a Gaussian
 #' process. The sample surfaces need to be measured on a common regular grid. The test
-#' considers the Hilbert--Schmidt distance between the sample covariance and its separable approximation.
+#' considers the Hilbert--Schmidt distance between the sample covariance and its separable approximation. WE DO NOT RECOMMEND THIS TEST, as it is does not have the
+#' correct level, nor good power.
 #' 
 #'
 #' @return The p-value of the test.
@@ -664,10 +678,10 @@ difference_fullcov <- function(Data){
 
 #' @examples 
 #' data(SurfacesData)
-#' \dontrun{HS_gaussian_bootstrap_test(SurfacesData, B = 100)}
+#' \dontrun{HS_gaussian_bootstrap_test(SurfacesData, B = 1000)}
 #' @export
 
-HS_gaussian_bootstrap_test  <- function(Data, B=100, verbose=FALSE)
+HS_gaussian_bootstrap_test  <- function(Data, B=1000, verbose=FALSE)
 {
     N<-dim(Data)[1]
     d1 <- dim(Data)[2]
@@ -705,13 +719,15 @@ HS_gaussian_bootstrap_test  <- function(Data, B=100, verbose=FALSE)
 #' of the covariance structure for a random surface (introduced in the paper
 #' \url{http://arxiv.org/abs/1505.02023}), when generated from a Gaussian
 #' process. The sample surfaces need to be measured on a common regular grid. The test
-#' considers the Hilbert--Schmidt distance between the sample covariance and its separable approximation.
+#' considers the Hilbert--Schmidt distance between the sample covariance and its
+#' separable approximation. WE DO NOT RECOMMEND THIS TEST, as it is does not have the
+#' correct level, nor good power.
 #'
 #' @return The p-value of the test.
 #' 
 #' @examples 
 #' data(SurfacesData)
-#' \dontrun{HS_empirical_bootstrap_test(SurfacesData, B = 100)}
+#' \dontrun{HS_empirical_bootstrap_test(SurfacesData, B = 1000)}
 #' @export
 
 HS_empirical_bootstrap_test  <- function(Data, B=100, verbose=FALSE)
