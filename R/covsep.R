@@ -3,8 +3,11 @@
 #'
 #' Functions for testing if the covariance structure of 2-dimensional data (e.g.
 #' samples of surfaces X_i = X_i(s,t)) is separable, i.e. if cov(X) = C_1 x C_2. 
-#' A complete descriptions of the implemented tests can be found in the paper
-#' arXiv:1505.02023. 
+#' A complete descriptions of the implemented tests can be found in the paper Aston et al. (2017); see references below.
+#' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
+#' separability in nonparametric covariance operators of random surfaces. Ann.
+#' Statist. 45 (2017), no. 4, 1431--1461. <doi:10.1214/16-AOS1495>.
+#' <https://projecteuclid.org/euclid.aos/1498636862>}
 #'
 #' @section Main functions:
 #' The main functions are \itemize{
@@ -445,14 +448,17 @@ clt_test  <- function(Data, L1, L2)
 #' 
 #' \code{B} the number of bootstrap replicates (1000 by default).
 #'
+#' \code{verbose} to print the progress of the computations (TRUE by default)
+#'
 #' @return The p-value of the test for each pair \code{(l1,l2) = (L1[k], L2[k])}, for \code{k = 1:length(L1)}.
 #' 
 #' @seealso \code{\link{empirical_bootstrap_test}}, \code{\link{clt_test}}
 #' 
 #' @examples
 #' data(SurfacesData)
-#' \dontrun{gaussian_bootstrap_test(SurfacesData)}
-#' \dontrun{gaussian_bootstrap_test(SurfacesData, L1=2,L2=2,B=1000, studentize='full')}
+#' \donttest{gaussian_bootstrap_test(SurfacesData)}
+#' gaussian_bootstrap_test(SurfacesData, B=100)
+#' \donttest{gaussian_bootstrap_test(SurfacesData, L1=2,L2=2,B=1000, studentize='full')}
 #'
 #' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
 #' separability in nonparametric covariance operators of random surfaces. Ann.
@@ -461,7 +467,7 @@ clt_test  <- function(Data, L1, L2)
 #' @export
 
 
-gaussian_bootstrap_test  <- function(Data, L1=1, L2=2, studentize='full', B=100, verbose=FALSE)
+gaussian_bootstrap_test  <- function(Data, L1=1, L2=2, studentize='full', B=1000, verbose=TRUE)
 {
     N<-dim(Data)[1]
     d1 <- dim(Data)[2]
@@ -562,21 +568,24 @@ gaussian_bootstrap_test  <- function(Data, L1=1, L2=2, studentize='full', B=100,
 #' 
 #' \code{B} the number of bootstrap replicates (1000 by default).
 #'
+#' \code{verbose} to print the progress of the computations (TRUE by default)
+#'
 #' @return The p-value of the test for each pair \code{(l1,l2) = (L1[k], L2[k])}, for \code{k = 1:length(L1)}.
 #' 
 #' @seealso \code{\link{gaussian_bootstrap_test}}, \code{\link{clt_test}}
 #' 
 #' @examples 
 #' data(SurfacesData)
-#' \dontrun{empirical_bootstrap_test(SurfacesData)}
-#' \dontrun{empirical_bootstrap_test(SurfacesData,L1=2,L2=2, B=1000, studentize='full')}
+#' \donttest{empirical_bootstrap_test(SurfacesData)}
+#' empirical_bootstrap_test(SurfacesData, B=100)
+#' \donttest{empirical_bootstrap_test(SurfacesData,L1=2,L2=2, B=1000, studentize='full')}
 #' @references \cite{Aston, John A. D.; Pigoli, Davide; Tavakoli, Shahin. Tests for
 #' separability in nonparametric covariance operators of random surfaces. Ann.
 #' Statist. 45 (2017), no. 4, 1431--1461. doi:10.1214/16-AOS1495.
 #' https://projecteuclid.org/euclid.aos/1498636862}
 #' @export
 
-empirical_bootstrap_test  <- function(Data, L1=1, L2=1, studentize='full', B=1000, verbose=FALSE)
+empirical_bootstrap_test  <- function(Data, L1=1, L2=1, studentize='full', B=1000, verbose=TRUE)
 {
     N<-dim(Data)[1]
     d1 <- dim(Data)[2]
@@ -678,10 +687,11 @@ difference_fullcov <- function(Data){
 
 #' @examples 
 #' data(SurfacesData)
-#' \dontrun{HS_gaussian_bootstrap_test(SurfacesData, B = 1000)}
+#' \donttest{HS_gaussian_bootstrap_test(SurfacesData)}
+#' HS_gaussian_bootstrap_test(SurfacesData, B = 100)
 #' @export
 
-HS_gaussian_bootstrap_test  <- function(Data, B=1000, verbose=FALSE)
+HS_gaussian_bootstrap_test  <- function(Data, B=1000, verbose=TRUE)
 {
     N<-dim(Data)[1]
     d1 <- dim(Data)[2]
@@ -727,10 +737,11 @@ HS_gaussian_bootstrap_test  <- function(Data, B=1000, verbose=FALSE)
 #' 
 #' @examples 
 #' data(SurfacesData)
-#' \dontrun{HS_empirical_bootstrap_test(SurfacesData, B = 1000)}
+#' \donttest{HS_empirical_bootstrap_test(SurfacesData)}
+#' HS_empirical_bootstrap_test(SurfacesData, B = 100)
 #' @export
 
-HS_empirical_bootstrap_test  <- function(Data, B=100, verbose=FALSE)
+HS_empirical_bootstrap_test  <- function(Data, B=100, verbose=TRUE)
 {
     N<-dim(Data)[1]
     d1 <- dim(Data)[2]

@@ -81,6 +81,7 @@ nrep  <- 100
 B  <- 1000
 
 
+system.time( gaussian_bootstrap_test(Data) )
 system.time( gaussian_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='no', B=B) )
 
 system.time({
@@ -194,6 +195,7 @@ par(op)
 nrep  <- 100
 B  <- 100
 
+empirical_bootstrap_test(Data)
 empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='no', B=B)
 empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='diag', B=B)
 empirical_bootstrap_test(Data, L1=1:3, L2=1:3, studentize='full', B=B)
